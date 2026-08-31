@@ -1,0 +1,127 @@
+{
+  "users": [
+    {
+      "id": "usr-student-tathagata",
+      "name": "Tathagata Chakraborty",
+      "email": "student@portal.edu",
+      "password_hash": "$2a$10$pSw6S7PU/c/Fc6nOsSyvS.F9rnUyO.MW8nfBwrjKPgIzyAPkAynVm",
+      "role": "student",
+      "roll_number": "UG/SOET/30/24/144",
+      "section": "G",
+      "program": "B.Tech CSE",
+      "created_at": "2026-08-31T06:00:03.617Z",
+      "updated_at": "2026-08-31T06:00:03.618Z"
+    },
+    {
+      "id": "usr-admin-portal",
+      "name": "System Administrator",
+      "email": "admin@portal.edu",
+      "password_hash": "$2a$10$pSw6S7PU/c/Fc6nOsSyvS.lI7KZrhvxxwcLcNdHbmd9pl7zZGAWGG",
+      "role": "admin",
+      "roll_number": "ADMIN/001",
+      "section": "STAFF",
+      "program": "Faculty of Engineering",
+      "created_at": "2026-08-31T06:00:03.618Z",
+      "updated_at": "2026-08-31T06:00:03.618Z"
+    },
+    {
+      "name": "Tathagata Chakraborty",
+      "email": "tathagatachakraborty1234@gmail.com",
+      "password_hash": "$2a$10$Nuu7kHGHE5zsYz8ij2jLw./yIeObiiQL8/sN/Q7GA/YLAVGmBFeg.",
+      "role": "student",
+      "roll_number": "UG/SOET/30/24/144",
+      "section": "G",
+      "program": "B.Tech CSE",
+      "id": "usr-bfa56c90-9327-4237-83de-40a742523bd9",
+      "created_at": "2026-08-31T06:02:42.809Z",
+      "updated_at": "2026-08-31T06:02:42.809Z"
+    }
+  ],
+  "documents": [
+    {
+      "id": "corpus-doc-1",
+      "user_id": "usr-admin-portal",
+      "title": "Distributed Consensus and Raft Protocol Analysis in Modern Microservices",
+      "filename": "corpus_ref_1.txt",
+      "file_path": "corpus://ref-1",
+      "file_type": "txt",
+      "file_size": 1024,
+      "extracted_text": "Distributed consensus algorithms form the bedrock of fault-tolerant replicated systems. The Raft consensus algorithm is designed to be more understandable than Paxos while providing equivalent fault tolerance and performance.",
+      "word_count": 32,
+      "char_count": 236,
+      "sentence_count": 2,
+      "is_corpus_item": true,
+      "author_name": "Prof. A. Vance, Distributed Computing Review (2023)",
+      "created_at": "2026-08-31T06:00:03.618Z",
+      "updated_at": "2026-08-31T06:00:03.618Z"
+    },
+    {
+      "id": "corpus-doc-2",
+      "user_id": "usr-admin-portal",
+      "title": "Comparative Study of Asymptotic Complexity in Graph Algorithms",
+      "filename": "corpus_ref_2.txt",
+      "file_path": "corpus://ref-2",
+      "file_type": "txt",
+      "file_size": 1024,
+      "extracted_text": "Graph traversal and shortest path computation are fundamental problems in computer science. Dijkstra algorithm computes single-source shortest paths in weighted directed graphs with non-negative edge weights.",
+      "word_count": 28,
+      "char_count": 213,
+      "sentence_count": 2,
+      "is_corpus_item": true,
+      "author_name": "Dr. E. Dijkstra & Dr. R. Tarjan, Journal of Algorithms (2022)",
+      "created_at": "2026-08-31T06:00:03.618Z",
+      "updated_at": "2026-08-31T06:00:03.618Z"
+    },
+    {
+      "user_id": "usr-student-tathagata",
+      "title": "College-Consent-Letter-for-SPOC-SIH2026",
+      "filename": "College-Consent-Letter-for-SPOC-SIH2026.docx",
+      "file_path": "C:\\Users\\TATHAGATA\\Desktop\\plagarism checking portal\\data\\uploads\\1788158259440_College-Consent-Letter-for-SPOC-SIH2026.docx",
+      "file_type": "docx",
+      "file_size": 18435,
+      "extracted_text": "< College letter head >\n\nDate: xx/Month/2026\n\nTo: Whom so it May Concern:\n\nSub: Smart India Hackathon 2026 – Appointment of College SPOC\n\nThis is to inform that the following Principal/ Dean/ official/ faculty member from our institute has been appointed as College Single Point of Contact (College SPOC) for Smart India Hackathon 2026.\n\nName of Official:\n\nDesignation:\n\nMobile no:\n\nEmail id:\n\n\n\n\n\n(Only 1 SPOC per institute is allowed.)\n\n\n\nWe understand that, the SPOC will be:\n\nSingle Point of Contact to reach out to regarding any SIH2026 related communication to the institute/ student teams from SIH organizers.\n\nSPOC will be responsible for nominating top 50 teams - 45 Shortlisted and 05 Waitlist teams inclusive of both software and hardware. \n\n\n\n Sincerely,\n\n< Principal’s Name > \n\nSign/-\n\nThe Principal            < College Stamp >",
+      "word_count": 131,
+      "char_count": 841,
+      "sentence_count": 5,
+      "is_corpus_item": false,
+      "author_name": "Tathagata Chakraborty",
+      "id": "doc-fd3de215-4d54-4b0e-b6c4-3df86a9f80c1",
+      "created_at": "2026-08-31T06:37:39.487Z",
+      "updated_at": "2026-08-31T06:37:39.487Z"
+    }
+  ],
+  "plagiarism_reports": [
+    {
+      "document_id": "doc-fd3de215-4d54-4b0e-b6c4-3df86a9f80c1",
+      "overall_score": 0.8,
+      "risk_level": "low",
+      "matched_sources_count": 0,
+      "matched_passages_count": 0,
+      "analysis_duration_ms": 10,
+      "algorithm_breakdown": {
+        "exact_match_score": 0,
+        "ngram_jaccard_score": 0,
+        "tfidf_cosine_score": 3.1,
+        "sentence_overlap_score": 0,
+        "total_sentences": 5,
+        "flagged_sentences": 0
+      },
+      "id": "rep-0183aa13-3092-4def-90d8-87aab19a7ae8",
+      "created_at": "2026-08-31T06:37:39.500Z"
+    }
+  ],
+  "similarity_matches": [],
+  "system_settings": {
+    "id": "global-settings",
+    "ngram_size": 3,
+    "similarity_threshold_low": 15,
+    "similarity_threshold_moderate": 30,
+    "similarity_threshold_high": 50,
+    "min_passage_length": 20,
+    "exact_match_weight": 0.4,
+    "ngram_weight": 0.35,
+    "cosine_weight": 0.25,
+    "allow_student_delete": true,
+    "updated_at": "2026-08-31T06:00:03.618Z"
+  }
+}

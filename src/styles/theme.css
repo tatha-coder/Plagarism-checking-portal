@@ -1,0 +1,87 @@
+/* Custom Theme Variables and Academic Portal Design Tokens */
+
+:root {
+  --background: #FBFBF9;
+  --foreground: #0F172A;
+  --surface: #FFFFFF;
+  --surface-border: #E2E8F0;
+  
+  /* Primary Academic Navy */
+  --academic-50: #EFF6FF;
+  --academic-100: #DBEAFE;
+  --academic-200: #BFDBFE;
+  --academic-500: #3B82F6;
+  --academic-700: #1D4ED8;
+  --academic-800: #1E40AF;
+  --academic-900: #1E3A8A;
+
+  /* Risk Indicators */
+  --risk-low: #059669;
+  --risk-moderate: #D97706;
+  --risk-high: #EA580C;
+  --risk-critical: #E11D48;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Academic Scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: #F1F5F9;
+}
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
+
+/* Interactive Match Highlight Styles */
+.highlight-passage {
+  background-color: #FEF08A;
+  border-bottom: 2px solid #EAB308;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+  padding: 1px 2px;
+  border-radius: 2px;
+}
+
+.highlight-passage:hover {
+  background-color: #FDE047;
+  border-bottom-color: #CA8A04;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.highlight-passage.active-match {
+  background-color: #FED7AA;
+  border-bottom: 2px solid #F97316;
+  outline: 2px solid #F97316;
+}
+
+/* Print Certificate Formatting */
+@media print {
+  body {
+    background: #FFFFFF !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+  .certificate-page {
+    border: 3px double #1E3A8A !important;
+    padding: 24px !important;
+    page-break-after: always;
+  }
+}
