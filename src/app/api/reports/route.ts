@@ -62,7 +62,7 @@ export async function GET(req: NextRequest) {
       if (search) {
         const matchTitle = item.document.title.toLowerCase().includes(search);
         const matchFilename = item.document.filename.toLowerCase().includes(search);
-        const matchOwner = item.owner?.name.toLowerCase().includes(search) || item.owner?.roll_number.toLowerCase().includes(search);
+        const matchOwner = item.owner?.name.toLowerCase().includes(search) || item.owner?.roll_number?.toLowerCase().includes(search);
         return matchTitle || matchFilename || !!matchOwner;
       }
       return true;

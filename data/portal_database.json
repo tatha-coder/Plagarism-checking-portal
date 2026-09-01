@@ -35,6 +35,18 @@
       "id": "usr-bfa56c90-9327-4237-83de-40a742523bd9",
       "created_at": "2026-08-31T06:02:42.809Z",
       "updated_at": "2026-08-31T06:02:42.809Z"
+    },
+    {
+      "name": "harighish",
+      "email": "aweeb696@gmail.com",
+      "password_hash": "$2a$10$pAWXsj2z4r8.HNcCyTLrLuQRA875Q.RZAPsRbZ9Ngwmg8V7NkOf3G",
+      "role": "student",
+      "roll_number": "",
+      "section": "",
+      "program": "",
+      "id": "usr-871ece86-9b90-469a-8e71-91f18e8df4a0",
+      "created_at": "2026-09-01T17:21:05.331Z",
+      "updated_at": "2026-09-01T17:21:05.331Z"
     }
   ],
   "documents": [

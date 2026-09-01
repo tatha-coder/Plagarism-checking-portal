@@ -38,6 +38,30 @@ export function extractToken(req: NextRequest): string | null {
   return null;
 }
 
+export async function getAuthenticatedUserAsync(req: NextRequest): Promise<SafeUser | null> {
+  const token = extractToken(req);
+  if (token) {
+    const payload = verifyToken(token);
+    if (payload) {
+      const user = db.getUserById(payload.userId);
+      if (user) {
+        return {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          role: user.role,
+          roll_number: user.roll_number,
+          section: user.section,
+          program: user.program,
+          created_at: user.created_at,
+          updated_at: user.updated_at,
+        };
+      }
+    }
+  }
+  return null;
+}
+
 export function getAuthenticatedUser(req: NextRequest): SafeUser | null {
   const token = extractToken(req);
   if (token) {

@@ -2,10 +2,12 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { SafeUser } from '@/types';
+import { supabase } from './supabase/client';
 
 interface AuthContextType {
   user: SafeUser | null;
   loading: boolean;
+  register: (name: string, email: string, password: string) => Promise<{ success: boolean; error?: string }>;
   login: (email: string, password: string) => Promise<{ success: boolean; error?: string }>;
   logout: () => Promise<void>;
   refreshUser: () => Promise<void>;
@@ -16,11 +18,11 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 const DEFAULT_STUDENT_USER: SafeUser = {
   id: 'usr_student_001',
-  name: 'Aarav Sharma',
+  name: 'Tathagata Chakraborty',
   email: 'student@portal.edu',
   role: 'student',
-  roll_number: '22/CSE/UG/042',
-  section: 'CSE-A',
+  roll_number: 'UG/SOET/30/24/144',
+  section: 'G',
   program: 'B.Tech Computer Science & Engineering',
   created_at: new Date().toISOString(),
   updated_at: new Date().toISOString(),
@@ -28,60 +30,165 @@ const DEFAULT_STUDENT_USER: SafeUser = {
 
 const DEFAULT_ADMIN_USER: SafeUser = {
   id: 'usr_admin_001',
-  name: 'Prof. Dr. Rajesh Verma',
+  name: 'System Administrator',
   email: 'admin@portal.edu',
   role: 'admin',
-  roll_number: 'FAC/CSE/2026/01',
-  section: 'CSE Department',
-  program: 'Faculty / Administration',
+  roll_number: 'ADMIN/001',
+  section: 'Administration',
+  program: 'Faculty / Admin',
   created_at: new Date().toISOString(),
   updated_at: new Date().toISOString(),
 };
 
+function mapSupabaseUserToSafeUser(sbUser: any): SafeUser {
+  const metadata = sbUser.user_metadata || {};
+  return {
+    id: sbUser.id,
+    name: metadata.name || metadata.full_name || sbUser.email?.split('@')[0] || 'User',
+    email: sbUser.email || '',
+    role: (metadata.role as 'student' | 'admin') || 'student',
+    roll_number: metadata.roll_number || '',
+    section: metadata.section || '',
+    program: metadata.program || '',
+    created_at: sbUser.created_at || new Date().toISOString(),
+    updated_at: sbUser.updated_at || new Date().toISOString(),
+  };
+}
+
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<SafeUser | null>(DEFAULT_STUDENT_USER);
-  const [loading, setLoading] = useState(false);
+  const [user, setUser] = useState<SafeUser | null>(null);
+  const [loading, setLoading] = useState(true);
 
   const fetchCurrentUser = async () => {
     try {
+      // 1. Try Supabase Auth session
+      const { data: { user: sbUser } } = await supabase.auth.getUser();
+      if (sbUser) {
+        setUser(mapSupabaseUserToSafeUser(sbUser));
+        setLoading(false);
+        return;
+      }
+
+      // 2. Try internal /api/auth/me fallback
       const res = await fetch('/api/auth/me');
       if (res.ok) {
         const data = await res.json();
         if (data.user) {
           setUser(data.user);
+          setLoading(false);
           return;
         }
       }
     } catch (err) {
-      // fallback already set
+      // Keep default demo user
+    } finally {
+      setLoading(false);
     }
   };
 
   useEffect(() => {
     fetchCurrentUser();
+
+    // Listen to Supabase auth state changes
+    const { data: authListener } = supabase.auth.onAuthStateChange(async (_event: string, session: any) => {
+      if (session?.user) {
+        setUser(mapSupabaseUserToSafeUser(session.user));
+      } else if (_event === 'SIGNED_OUT') {
+        setUser(null);
+      }
+    });
+
+    return () => {
+      authListener?.subscription?.unsubscribe();
+    };
   }, []);
+
+  const register = async (name: string, email: string, password: string) => {
+    try {
+      // Supabase Auth sign-up with Name in user_metadata
+      const { data, error } = await supabase.auth.signUp({
+        email: email.trim().toLowerCase(),
+        password,
+        options: {
+          data: {
+            name: name.trim(),
+            role: 'student',
+          },
+        },
+      });
+
+      if (error) {
+        // Fallback to internal API if Supabase project is not yet reachable/configured
+        const fallbackRes = await fetch('/api/auth/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, password }),
+        });
+        const fallbackData = await fallbackRes.json();
+        if (fallbackRes.ok && fallbackData.user) {
+          setUser(fallbackData.user);
+          return { success: true };
+        }
+        return { success: false, error: error.message };
+      }
+
+      if (data.user) {
+        setUser(mapSupabaseUserToSafeUser(data.user));
+        // Also register in local DB so document uploads associate seamlessly
+        try {
+          await fetch('/api/auth/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, email, password }),
+          });
+        } catch (e) {}
+
+        return { success: true };
+      }
+
+      return { success: false, error: 'Registration could not be completed.' };
+    } catch (err: any) {
+      return { success: false, error: err.message || 'An unexpected error occurred during registration.' };
+    }
+  };
 
   const login = async (email: string, password: string) => {
     try {
+      // 1. Try Supabase Auth sign-in
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: email.trim().toLowerCase(),
+        password,
+      });
+
+      if (!error && data.user) {
+        setUser(mapSupabaseUserToSafeUser(data.user));
+        return { success: true };
+      }
+
+      // 2. Fallback to API route login
       const res = await fetch('/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
       });
-      const data = await res.json();
-      if (res.ok) {
-        setUser(data.user);
+      const resData = await res.json();
+      if (res.ok && resData.user) {
+        setUser(resData.user);
         return { success: true };
-      } else {
-        return { success: false, error: data.error || 'Login failed' };
       }
+
+      return { 
+        success: false, 
+        error: error?.message || resData.error || 'Invalid email or password.' 
+      };
     } catch (err: any) {
-      return { success: false, error: 'Network or server error' };
+      return { success: false, error: 'Network or server error during sign in.' };
     }
   };
 
   const logout = async () => {
     try {
+      await supabase.auth.signOut();
       await fetch('/api/auth/logout', { method: 'POST' });
     } catch (e) {
       console.error(e);
@@ -98,9 +205,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const email = role === 'student' ? 'student@portal.edu' : 'admin@portal.edu';
       const password = role === 'student' ? 'password123' : 'admin123';
       await login(email, password);
-    } catch (e) {
-      // Ignored
-    }
+    } catch (e) {}
     window.location.href = role === 'student' ? '/dashboard' : '/admin';
   };
 
@@ -109,6 +214,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       value={{
         user,
         loading,
+        register,
         login,
         logout,
         refreshUser: fetchCurrentUser,

@@ -4,11 +4,11 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/lib/AuthContext';
-import { ShieldCheck, Lock, Mail, ArrowRight, AlertCircle, Sparkles, UserCheck } from 'lucide-react';
+import { ShieldCheck, Lock, Mail, ArrowRight, AlertCircle } from 'lucide-react';
 
 export default function LoginPage() {
   const router = useRouter();
-  const { login, quickLoginDemo } = useAuth();
+  const { login } = useAuth();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -30,57 +30,27 @@ export default function LoginPage() {
     }
   };
 
-  const handleDemoSelect = (role: 'student' | 'admin') => {
-    quickLoginDemo(role);
-  };
-
   return (
-    <div className="flex-1 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-surface-subtle">
+    <div className="flex-1 flex items-center justify-center py-16 px-4 sm:px-6 lg:px-8 bg-slate-50">
       <div className="max-w-md w-full space-y-6">
         
         {/* Header */}
         <div className="text-center space-y-2">
-          <div className="w-12 h-12 rounded-xl bg-academic-800 text-white flex items-center justify-center mx-auto shadow-subtle">
-            <ShieldCheck className="w-7 h-7 text-blue-200" />
+          <div className="w-10 h-10 rounded-lg bg-slate-900 text-white flex items-center justify-center mx-auto">
+            <ShieldCheck className="w-5 h-5 text-slate-100" />
           </div>
-          <h2 className="font-serif text-2xl sm:text-3xl font-bold text-foreground">
-            Sign In to Portal
+          <h2 className="font-serif text-2xl sm:text-3xl font-bold text-slate-900">
+            Sign In
           </h2>
-          <p className="text-xs sm:text-sm text-slate-600">
-            Access your plagiarism reports, submission history, and analysis tools
+          <p className="text-sm text-slate-600">
+            Access your submissions and reports
           </p>
         </div>
 
-        {/* Demo Fast-Login Box */}
-        <div className="p-4 rounded-xl bg-academic-50/80 border border-academic-200 space-y-3">
-          <div className="flex items-center space-x-2 text-xs font-semibold text-academic-900">
-            <Sparkles className="w-4 h-4 text-academic-600" />
-            <span>Instant Demo Accounts (One-Click Login)</span>
-          </div>
-          <div className="grid grid-cols-2 gap-2.5">
-            <button
-              type="button"
-              onClick={() => handleDemoSelect('student')}
-              className="p-2.5 rounded-lg bg-white border border-academic-200 hover:border-academic-400 text-left transition-all shadow-subtle hover:bg-academic-50/50"
-            >
-              <div className="text-xs font-bold text-slate-900">Student Account</div>
-              <div className="text-[10px] text-slate-700 font-mono mt-0.5">Tathagata Chakraborty</div>
-            </button>
-            <button
-              type="button"
-              onClick={() => handleDemoSelect('admin')}
-              className="p-2.5 rounded-lg bg-white border border-academic-200 hover:border-academic-400 text-left transition-all shadow-subtle hover:bg-academic-50/50"
-            >
-              <div className="text-xs font-bold text-slate-900">Admin Account</div>
-              <div className="text-[10px] text-slate-700 font-mono mt-0.5">System Administrator</div>
-            </button>
-          </div>
-        </div>
-
-        {/* Main Login Form */}
-        <div className="bg-white p-6 sm:p-8 rounded-2xl border border-surface-border shadow-card space-y-5">
+        {/* Form Card */}
+        <div className="bg-white p-6 sm:p-8 rounded-xl border border-slate-200 shadow-sm space-y-5">
           {error && (
-            <div className="p-3.5 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs flex items-center space-x-2">
+            <div className="p-3 rounded-lg bg-red-50 border border-red-200 text-red-700 text-xs flex items-center space-x-2">
               <AlertCircle className="w-4 h-4 shrink-0" />
               <span>{error}</span>
             </div>
@@ -88,8 +58,8 @@ export default function LoginPage() {
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">
-                Email Address
+              <label className="block text-xs font-medium text-slate-700 mb-1.5">
+                Email address
               </label>
               <div className="relative">
                 <Mail className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
@@ -98,14 +68,14 @@ export default function LoginPage() {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="student@portal.edu"
-                  className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-academic-500 focus:border-transparent bg-slate-50/40"
+                  placeholder="name@example.com"
+                  className="w-full pl-10 pr-4 py-2 rounded-lg border border-slate-300 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-900 bg-white"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">
+              <label className="block text-xs font-medium text-slate-700 mb-1.5">
                 Password
               </label>
               <div className="relative">
@@ -116,7 +86,7 @@ export default function LoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-academic-500 focus:border-transparent bg-slate-50/40"
+                  className="w-full pl-10 pr-4 py-2 rounded-lg border border-slate-300 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-900 bg-white"
                 />
               </div>
             </div>
@@ -124,10 +94,10 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full py-2.5 px-4 rounded-xl bg-academic-800 hover:bg-academic-900 text-white font-medium text-sm flex items-center justify-center space-x-2 shadow-sm transition-all disabled:opacity-50"
+              className="w-full py-2.5 px-4 rounded-lg bg-slate-900 hover:bg-slate-800 text-white font-medium text-sm flex items-center justify-center space-x-2 transition-colors disabled:opacity-50 mt-2"
             >
               {isSubmitting ? (
-                <span>Authenticating...</span>
+                <span>Signing in...</span>
               ) : (
                 <>
                   <span>Sign In</span>
@@ -139,9 +109,9 @@ export default function LoginPage() {
 
           <div className="border-t border-slate-100 pt-4 text-center">
             <p className="text-xs text-slate-600">
-              Don't have an account yet?{' '}
-              <Link href="/register" className="font-semibold text-academic-700 hover:text-academic-900">
-                Register here
+              Don't have an account?{' '}
+              <Link href="/register" className="font-semibold text-slate-900 hover:underline">
+                Create one
               </Link>
             </p>
           </div>

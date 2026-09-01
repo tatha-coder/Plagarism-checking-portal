@@ -6,7 +6,7 @@ import Footer from '@/components/layout/Footer';
 
 export const metadata: Metadata = {
   title: 'Plagiarism Checking Portal | Academic Similarity Analysis',
-  description: 'Enterprise academic plagiarism detection platform by Tathagata Chakraborty (UG/SOET/30/24/144), featuring N-gram shingling, TF-IDF cosine comparison, and interactive passage inspection.',
+  description: 'Enterprise academic plagiarism detection platform featuring N-gram shingling, TF-IDF cosine comparison, and interactive passage inspection.',
 };
 
 export default function RootLayout({

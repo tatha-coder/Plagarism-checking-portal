@@ -123,31 +123,25 @@ export default function DashboardPage() {
 
   return (
     <div className="flex-1 py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full space-y-8">
-      {/* Student Welcome Banner */}
-      <div className="bg-gradient-to-r from-academic-900 to-academic-800 text-white rounded-2xl p-6 sm:p-8 shadow-card flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-        <div className="space-y-2">
-          <div className="inline-flex items-center space-x-2 px-2.5 py-1 rounded bg-white/10 text-xs font-mono backdrop-blur-sm text-blue-100">
-            <span>Roll: {user?.roll_number || 'UG/SOET/30/24/144'}</span>
-            <span>•</span>
-            <span>Sec: {user?.section || 'G'}</span>
-            <span>•</span>
-            <span>{user?.program || 'B.Tech CSE'}</span>
-          </div>
-          <h1 className="font-serif text-2xl sm:text-3xl font-bold tracking-tight">
-            Welcome back, {user?.name}
+      {/* Welcome Banner */}
+      <div className="bg-white border border-slate-200 rounded-xl p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <div className="space-y-1">
+          <h1 className="text-2xl font-bold text-slate-900">
+            Welcome back, {user?.name || 'User'}
           </h1>
-          <p className="text-xs sm:text-sm text-blue-100/80 max-w-xl">
-            Plagiarism analysis engine is active and ready. Verify your research papers, lab reports, and assignments against the institutional corpus.
+          <p className="text-sm text-slate-600 max-w-xl">
+            View your recent submissions and check new documents for similarity.
           </p>
         </div>
-
-        <Link
-          href="/upload"
-          className="shrink-0 px-5 py-3 rounded-xl bg-white text-academic-900 hover:bg-blue-50 font-semibold text-sm shadow-subtle flex items-center space-x-2 transition-all hover:scale-[1.02]"
-        >
-          <UploadCloud className="w-4 h-4 text-academic-700" />
-          <span>Check New Document</span>
-        </Link>
+        <div className="flex flex-wrap gap-3">
+          <Link
+            href="/upload"
+            className="px-4 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-white font-medium text-sm flex items-center space-x-2 transition-colors"
+          >
+            <UploadCloud className="w-4 h-4" />
+            <span>Check New Document</span>
+          </Link>
+        </div>
       </div>
 
       {/* 4 Stats Cards */}

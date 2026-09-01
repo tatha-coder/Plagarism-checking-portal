@@ -37,9 +37,9 @@ export async function POST(req: NextRequest) {
       email: email.trim().toLowerCase(),
       password_hash,
       role: role === 'admin' ? 'admin' : 'student',
-      roll_number: roll_number?.trim() || 'UG/SOET/30/24/144',
-      section: section?.trim() || 'G',
-      program: program?.trim() || 'B.Tech CSE',
+      roll_number: roll_number?.trim() || '',
+      section: section?.trim() || '',
+      program: program?.trim() || '',
     });
 
     const token = signToken({

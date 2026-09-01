@@ -154,15 +154,11 @@ export default function UploadPage() {
     <div className="flex-1 py-10 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto w-full space-y-8">
       {/* Header */}
       <div className="text-center space-y-2">
-        <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-academic-50 border border-academic-200 text-xs font-semibold text-academic-800">
-          <ShieldCheck className="w-4 h-4 text-academic-700" />
-          <span>Institutional Plagiarism Engine</span>
-        </div>
-        <h1 className="font-serif text-3xl sm:text-4xl font-bold text-foreground">
-          Document Similarity Verification
+        <h1 className="text-2xl sm:text-3xl font-bold text-slate-900">
+          Check a Document
         </h1>
-        <p className="text-xs sm:text-sm text-slate-600 max-w-lg mx-auto">
-          Upload an academic paper or paste text to perform sentence-level matching, N-gram shingling, and TF-IDF comparison.
+        <p className="text-sm text-slate-600 max-w-md mx-auto">
+          Upload a file or paste text below to generate an instant similarity breakdown.
         </p>
       </div>
 
@@ -198,7 +194,7 @@ export default function UploadPage() {
               type="text"
               value={authorName}
               onChange={(e) => setAuthorName(e.target.value)}
-              placeholder="e.g. Tathagata Chakraborty"
+              placeholder="e.g. John Doe"
               className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-academic-500 bg-slate-50/50"
             />
           </div>
@@ -318,49 +314,48 @@ export default function UploadPage() {
           </div>
         )}
 
-        {/* Quick Demo Samples Bar */}
+        {/* Sample Texts */}
         <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
-          <div className="flex items-center space-x-2 text-xs font-semibold text-slate-700">
-            <Sparkles className="w-3.5 h-3.5 text-academic-600" />
-            <span>Load Quick Academic Test Samples:</span>
+          <div className="text-xs font-medium text-slate-700">
+            Or load a sample document:
           </div>
           <div className="flex flex-wrap gap-2">
             <button
               type="button"
               onClick={() => handleSampleSelect('highPlagiarism')}
-              className="px-3 py-1.5 rounded-lg bg-white border border-slate-200 hover:border-red-300 hover:bg-red-50/30 text-xs text-slate-700 font-medium transition-all"
+              className="px-3 py-1.5 rounded-lg bg-white border border-slate-200 hover:border-slate-300 text-xs text-slate-700 font-medium transition-colors"
             >
-              1. Verbatim Copy (Raft Consensus) &rarr; <span className="text-red-600 font-bold">~90%+ Match</span>
+              Sample 1: Raft Protocol
             </button>
             <button
               type="button"
               onClick={() => handleSampleSelect('moderatePlagiarism')}
-              className="px-3 py-1.5 rounded-lg bg-white border border-slate-200 hover:border-amber-300 hover:bg-amber-50/30 text-xs text-slate-700 font-medium transition-all"
+              className="px-3 py-1.5 rounded-lg bg-white border border-slate-200 hover:border-slate-300 text-xs text-slate-700 font-medium transition-colors"
             >
-              2. Paraphrased (Graph Algorithms) &rarr; <span className="text-amber-600 font-bold">~35-50% Match</span>
+              Sample 2: Graph Algorithms
             </button>
             <button
               type="button"
               onClick={() => handleSampleSelect('originalWork')}
-              className="px-3 py-1.5 rounded-lg bg-white border border-slate-200 hover:border-emerald-300 hover:bg-emerald-50/30 text-xs text-slate-700 font-medium transition-all"
+              className="px-3 py-1.5 rounded-lg bg-white border border-slate-200 hover:border-slate-300 text-xs text-slate-700 font-medium transition-colors"
             >
-              3. Original Research (Quantum Cryptography) &rarr; <span className="text-emerald-600 font-bold">&lt;10% Match</span>
+              Sample 3: Original Research
             </button>
           </div>
         </div>
 
         {/* Admin Corpus Toggle */}
         {user?.role === 'admin' && (
-          <div className="p-3.5 rounded-xl bg-purple-50 border border-purple-200 flex items-center space-x-3">
+          <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 flex items-center space-x-3">
             <input
               type="checkbox"
               id="isCorpus"
               checked={isCorpus}
               onChange={(e) => setIsCorpus(e.target.checked)}
-              className="rounded text-academic-600 focus:ring-academic-500 w-4 h-4"
+              className="rounded text-slate-900 focus:ring-slate-900 w-4 h-4"
             />
-            <label htmlFor="isCorpus" className="text-xs text-purple-900 font-medium cursor-pointer">
-              <strong>Admin Mode:</strong> Store this document as an official baseline reference paper in the institutional comparison corpus.
+            <label htmlFor="isCorpus" className="text-xs text-slate-700 font-medium cursor-pointer">
+              Save as baseline comparison document (Admin)
             </label>
           </div>
         )}
@@ -370,16 +365,16 @@ export default function UploadPage() {
           type="button"
           onClick={startAnalysis}
           disabled={isAnalyzing}
-          className="w-full py-3.5 px-6 rounded-xl bg-academic-800 hover:bg-academic-900 text-white font-semibold text-sm flex items-center justify-center space-x-2 shadow-card transition-all disabled:opacity-50"
+          className="w-full py-3 px-6 rounded-lg bg-slate-900 hover:bg-slate-800 text-white font-medium text-sm flex items-center justify-center space-x-2 transition-colors disabled:opacity-50"
         >
           {isAnalyzing ? (
             <div className="flex items-center space-x-2">
               <RefreshCw className="w-4 h-4 animate-spin" />
-              <span>Analyzing Document...</span>
+              <span>Checking Document...</span>
             </div>
           ) : (
             <>
-              <span>{isCorpus ? 'Save to Reference Corpus' : 'Run Plagiarism Analysis'}</span>
+              <span>{isCorpus ? 'Save to Corpus' : 'Run Check'}</span>
               <ArrowRight className="w-4 h-4" />
             </>
           )}
