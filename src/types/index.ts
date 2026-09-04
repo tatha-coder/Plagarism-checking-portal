@@ -6,9 +6,9 @@ export interface User {
   email: string;
   password_hash: string;
   role: UserRole;
-  roll_number: string;
-  section: string;
-  program: string;
+  roll_number?: string;
+  section?: string;
+  program?: string;
   created_at: string;
   updated_at: string;
 }

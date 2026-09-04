@@ -21,7 +21,10 @@ export async function POST(req: NextRequest) {
   try {
     const user = getAuthenticatedUser(req);
     if (!user) {
-      return NextResponse.json({ error: 'Authentication required' }, { status: 401 });
+      return NextResponse.json(
+        { error: 'Authentication required. Please sign in with your student account to upload documents.' },
+        { status: 401 }
+      );
     }
 
     const formData = await req.formData();
@@ -29,7 +32,7 @@ export async function POST(req: NextRequest) {
     const rawText = formData.get('rawText') as string | null;
     const titleInput = formData.get('title') as string | null;
     const authorNameInput = formData.get('authorName') as string | null;
-    const isCorpusFlag = formData.get('isCorpus') === 'true' && user.role === 'admin';
+    const isCorpusFlag = false;
 
     let title = titleInput?.trim() || 'Untitled Submission';
     let filename = 'pasted_text.txt';

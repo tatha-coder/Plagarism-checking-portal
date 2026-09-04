@@ -174,7 +174,6 @@ function seedDatabase(): DatabaseSchema {
   ensureDataDirectories();
   const salt = bcrypt.genSaltSync(10);
   const studentPasswordHash = bcrypt.hashSync('password123', salt);
-  const adminPasswordHash = bcrypt.hashSync('admin123', salt);
 
   const studentUser: User = {
     id: 'usr-student-tathagata',
@@ -189,26 +188,13 @@ function seedDatabase(): DatabaseSchema {
     updated_at: new Date('2026-08-01T09:00:00Z').toISOString(),
   };
 
-  const adminUser: User = {
-    id: 'usr-admin-portal',
-    name: 'System Administrator',
-    email: 'admin@portal.edu',
-    password_hash: adminPasswordHash,
-    role: 'admin',
-    roll_number: 'ADMIN/001',
-    section: 'STAFF',
-    program: 'Faculty of Engineering',
-    created_at: new Date('2026-08-01T09:00:00Z').toISOString(),
-    updated_at: new Date('2026-08-01T09:00:00Z').toISOString(),
-  };
-
   // Seed academic reference documents into the corpus
   const corpusDocuments: DocumentRecord[] = DEFAULT_ACADEMIC_CORPUS.map((doc, idx) => {
     const words = doc.text.trim().split(/\s+/).filter(Boolean);
     const sentences = doc.text.split(/[.!?]+/).filter(s => s.trim().length > 0);
     return {
       id: `corpus-doc-${idx + 1}`,
-      user_id: 'usr-admin-portal',
+      user_id: 'system',
       title: doc.title,
       filename: `corpus_ref_${idx + 1}.txt`,
       file_path: `corpus://ref-${idx + 1}`,
@@ -226,7 +212,7 @@ function seedDatabase(): DatabaseSchema {
   });
 
   const schema: DatabaseSchema = {
-    users: [studentUser, adminUser],
+    users: [studentUser],
     documents: [...corpusDocuments],
     plagiarism_reports: [],
     similarity_matches: [],

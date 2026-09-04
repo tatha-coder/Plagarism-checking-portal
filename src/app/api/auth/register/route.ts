@@ -2,14 +2,22 @@ import { NextRequest, NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
 import { db } from '@/lib/db';
 import { signToken, setAuthCookie } from '@/lib/auth';
+import { isValidEmail } from '@/lib/validation';
 
 export async function POST(req: NextRequest) {
   try {
-    const { name, email, password, roll_number, section, program, role } = await req.json();
+    const { name, email, password, roll_number, section, program } = await req.json();
 
     if (!name || !email || !password) {
       return NextResponse.json(
         { error: 'Name, email, and password are required.' },
+        { status: 400 }
+      );
+    }
+
+    if (!isValidEmail(email)) {
+      return NextResponse.json(
+        { error: 'Please enter a valid email address.' },
         { status: 400 }
       );
     }
@@ -36,10 +44,10 @@ export async function POST(req: NextRequest) {
       name: name.trim(),
       email: email.trim().toLowerCase(),
       password_hash,
-      role: role === 'admin' ? 'admin' : 'student',
-      roll_number: roll_number?.trim() || 'UG/SOET/30/24/144',
-      section: section?.trim() || 'G',
-      program: program?.trim() || 'B.Tech CSE',
+      role: 'student',
+      roll_number: roll_number?.trim() || '',
+      section: section?.trim() || '',
+      program: program?.trim() || '',
     });
 
     const token = signToken({

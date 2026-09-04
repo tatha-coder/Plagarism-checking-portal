@@ -222,7 +222,6 @@ export default function HistoryPage() {
               <thead className="bg-surface-subtle border-b border-surface-border text-slate-500 uppercase tracking-wider font-semibold">
                 <tr>
                   <th className="py-3.5 px-6">Document</th>
-                  {user?.role === 'admin' && <th className="py-3.5 px-6">Student</th>}
                   <th className="py-3.5 px-6">Word Count</th>
                   <th className="py-3.5 px-6">Similarity Score</th>
                   <th className="py-3.5 px-6">Submission Date</th>
@@ -243,13 +242,6 @@ export default function HistoryPage() {
                         </div>
                       </div>
                     </td>
-
-                    {user?.role === 'admin' && (
-                      <td className="py-4 px-6">
-                        <div className="font-semibold text-slate-900">{item.owner?.name || 'Unknown'}</div>
-                        <div className="text-[10px] font-mono text-slate-500">{item.owner?.roll_number}</div>
-                      </td>
-                    )}
 
                     <td className="py-4 px-6 font-mono text-slate-600">
                       {item.document.word_count} words
