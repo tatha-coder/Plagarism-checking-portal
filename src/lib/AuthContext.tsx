@@ -35,22 +35,7 @@ function mapSupabaseUserToSafeUser(sbUser: any): SafeUser {
     id: sbUser.id,
     name: metadata.name || metadata.full_name || sbUser.email?.split('@')[0] || 'User',
     email: sbUser.email || '',
-    role: (metadata.role as 'student' | 'admin') || 'student',
-    roll_number: metadata.roll_number || '',
-    section: metadata.section || '',
-    program: metadata.program || '',
-    created_at: sbUser.created_at || new Date().toISOString(),
-    updated_at: sbUser.updated_at || new Date().toISOString(),
-  };
-}
-
-function mapSupabaseUserToSafeUser(sbUser: any): SafeUser {
-  const metadata = sbUser.user_metadata || {};
-  return {
-    id: sbUser.id,
-    name: metadata.name || metadata.full_name || sbUser.email?.split('@')[0] || 'User',
-    email: sbUser.email || '',
-    role: (metadata.role as 'student' | 'admin') || 'student',
+    role: 'student',
     roll_number: metadata.roll_number || '',
     section: metadata.section || '',
     program: metadata.program || '',
