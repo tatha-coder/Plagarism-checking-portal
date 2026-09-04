@@ -1,130 +1,350 @@
-# Plagiarism Checking Portal
+# 🔍 Plagiarism Checking Portal
 
-> **Institutional Academic Similarity & Plagiarism Detection Platform**  
-> **Student:** Tathagata Chakraborty  
-> **Roll Number:** UG/SOET/30/24/144  
-> **Section:** G  
-> **Program:** B.Tech Computer Science & Engineering (SOET)
+> **Check. Compare. Improve.**
 
----
+A modern academic **plagiarism and similarity checking portal** designed to help students verify the originality of their assignments, essays, and research documents.
 
-## 🌟 Overview
-
-The **Plagiarism Checking Portal** is an academic-grade SaaS application designed to analyze academic papers, research articles, laboratory reports, and student assignments for verbatim and structural similarity against an institutional corpus.
-
-### ✨ Core Features
-
-1. **Authentication & Authorization:**
-   - Role-based Access Control (Student & Administrator).
-   - Secure HTTP-Only cookie session management and JWT verification.
-   - Demo 1-Click Fast Login for Student (*Tathagata Chakraborty*) and Admin.
-
-2. **Document Upload & Multi-Format Text Extraction:**
-   - Native parsing for **PDF**, Microsoft Word (**DOCX**), and plain text (**TXT**).
-   - Drag-and-drop file upload with real-time size validation (up to 10MB).
-   - Direct text editor with live word and character counting + test sample pre-fill buttons.
-
-3. **Deterministic Plagiarism Engine (Modular Service):**
-   - **Sentence Segmentation & Character Offset Tracking:** Pinpoints exact match locations.
-   - **N-Gram Shingling (N=3):** Computes Jaccard similarity across word shingles.
-   - **TF-IDF Vector Space & Cosine Similarity:** Computes semantic text overlap.
-   - **Composite Multi-Algorithm Scoring:** Weighted deterministic score without random numbers or AI hallucinations.
-   - **Risk Classification:**
-     - `0% – 15%`: Low Risk (Acceptable scholarly originality)
-     - `16% – 30%`: Moderate Risk (Minor overlap, check citations)
-     - `31% – 50%`: High Risk (Substantial passage borrowing)
-     - `> 50%`: Critical Risk (Severe verbatim plagiarism)
-
-4. **Interactive Plagiarism Report:**
-   - Color-coded circular score gauge and breakdown statistics.
-   - **Interactive Document Reader:** Click on any highlighted text to open the **Passage Inspector** side-by-side with the matched reference source.
-   - Ranked matching sources list with percentage contribution.
-   - **Official Plagiarism Clearance Certificate:** Ready to export or print with university header, verification timestamp, student roll number, and digital certificate ID.
-
-5. **Submissions Archive & History:**
-   - Search by title, filter by risk level, and sort by date or similarity score.
-   - Safe document deletion with confirmation dialog.
-
-6. **Admin Control Center:**
-   - Institutional analytics (Total Submissions, System Mean Similarity, High-Risk Flags).
-   - Student leaderboard and role management.
-   - **Reference Corpus Manager:** Add and manage benchmark papers in the active comparison database.
-   - **Engine Calibration:** Adjust N-gram window size, risk thresholds, and algorithm weights.
+Users can upload documents, analyze their content for matching or closely similar passages, and review a clear similarity report with source references.
 
 ---
 
-## 🚀 Quick Start Guide
+## ✨ Features
 
-### Prerequisites
-- Node.js (v18 or newer)
-- npm
+### 📄 Document Upload
 
-### Installation & Run
+Upload your academic work in multiple formats:
+
+* PDF
+* Microsoft Word (`.docx`)
+* Plain Text (`.txt`)
+
+The system extracts the document content while preserving its structure.
+
+### 🔎 Similarity Detection
+
+Analyze uploaded documents to identify:
+
+* Verbatim copied content
+* Closely matching phrases
+* Similar or paraphrased sentences
+* Potentially duplicated passages
+
+### 📊 Detailed Similarity Reports
+
+Get a clear report containing:
+
+* Overall similarity percentage
+* Matched passages
+* Source references
+* Passage-by-passage comparison
+* Easy-to-understand analysis
+
+### 👨‍🎓 Student Authentication
+
+The platform is designed specifically for students with secure account authentication.
+
+* Student Sign Up
+* Student Sign In
+* Email-based authentication
+* Protected user functionality
+
+### 🎯 Simple User Experience
+
+The portal focuses on making plagiarism checking:
+
+**Simple → Fast → Clear → Actionable**
+
+---
+
+## 🚀 How It Works
+
+```text
+        ┌──────────────────┐
+        │   Student Login  │
+        └────────┬─────────┘
+                 │
+                 ▼
+        ┌──────────────────┐
+        │  Upload Document │
+        │ PDF / DOCX / TXT │
+        └────────┬─────────┘
+                 │
+                 ▼
+        ┌──────────────────┐
+        │ Text Extraction  │
+        └────────┬─────────┘
+                 │
+                 ▼
+        ┌──────────────────┐
+        │ Similarity       │
+        │ Analysis         │
+        └────────┬─────────┘
+                 │
+                 ▼
+        ┌──────────────────┐
+        │ Similarity Report│
+        │ + Sources        │
+        └──────────────────┘
+```
+
+### Step 1 — Create an Account
+
+Students create an account using their email and password.
+
+### Step 2 — Upload
+
+Upload an assignment, essay, paper, or research document.
+
+### Step 3 — Analyze
+
+The system extracts the document text and performs similarity analysis.
+
+### Step 4 — Review
+
+View the overall similarity score and inspect individual matched passages.
+
+### Step 5 — Improve
+
+Use the detected similarities and source information to improve originality, paraphrasing, and citations.
+
+---
+
+## 🛠️ Technology Stack
+
+| Technology                     | Purpose                           |
+| ------------------------------ | --------------------------------- |
+| **React**                      | Frontend application              |
+| **TypeScript / JavaScript**    | Application logic                 |
+| **Supabase**                   | Authentication & backend services |
+| **Vercel**                     | Deployment                        |
+| **PDF / DOCX Processing**      | Document text extraction          |
+| **Similarity Analysis Engine** | Content comparison                |
+
+> The exact technologies may vary depending on the current implementation of the project.
+
+---
+
+## 🏗️ Project Structure
+
+A recommended structure for the project:
+
+```text
+plagiarism-checking-portal/
+│
+├── frontend/
+│   ├── components/
+│   ├── pages/
+│   ├── styles/
+│   ├── services/
+│   └── utils/
+│
+├── backend/
+│   ├── api/
+│   ├── services/
+│   └── utils/
+│
+├── public/
+│
+├── supabase/
+│   ├── migrations/
+│   └── functions/
+│
+├── package.json
+├── README.md
+└── .env.example
+```
+
+---
+
+## 🔐 Authentication
+
+Authentication is handled using **Supabase**.
+
+The application is intended for student users and uses email-based authentication to protect user-specific functionality.
+
+### Environment Variables
+
+Create a `.env` file and configure the required variables:
+
+```env
+SUPABASE_URL=your_supabase_url
+SUPABASE_ANON_KEY=your_supabase_anon_key
+```
+
+If your project uses additional backend or AI services, configure those variables according to your deployment environment.
+
+**Never commit secret API keys or service-role keys to GitHub.**
+
+---
+
+## 💻 Getting Started
+
+### 1. Clone the Repository
 
 ```bash
-# 1. Install dependencies
+git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY.git
+```
+
+### 2. Navigate to the Project
+
+```bash
+cd YOUR-REPOSITORY
+```
+
+### 3. Install Dependencies
+
+```bash
 npm install
+```
 
-# 2. Run local development server
+### 4. Configure Environment Variables
+
+Create a `.env` file:
+
+```env
+SUPABASE_URL=your_supabase_url
+SUPABASE_ANON_KEY=your_supabase_anon_key
+```
+
+### 5. Start the Development Server
+
+```bash
 npm run dev
-
-# 3. Build for production
-npm run build
-npm run start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+The application should then be available at:
 
----
-
-## 🔑 Demo Accounts
-
-| Role | Email | Password | Details |
-|------|-------|----------|---------|
-| **Student** | `student@portal.edu` | `password123` | Tathagata Chakraborty (Roll: `UG/SOET/30/24/144`, Sec: `G`, `B.Tech CSE`) |
-| **Admin** | `admin@portal.edu` | `admin123` | System Administrator (Faculty of Engineering) |
-
-*(You can also use the 1-click demo login buttons directly on the Login screen and navigation bar!)*
-
----
-
-## 📐 Architecture
-
-```
-src/
-├── app/
-│   ├── api/
-│   │   ├── auth/          # Login, Register, Logout, Me, Profile
-│   │   ├── documents/     # Upload, Extraction, Deletion
-│   │   ├── reports/       # Report Generation & Retrieval
-│   │   ├── dashboard/     # Student Analytics
-│   │   └── admin/         # Platform Stats, Corpus & Engine Tuning
-│   ├── dashboard/         # Student Dashboard
-│   ├── upload/            # Document Upload & Real-time Progress
-│   ├── reports/[id]/      # Interactive Highlighted Report & Certificate
-│   ├── history/           # Submissions Search & Archive
-│   ├── profile/           # Academic Profile
-│   ├── admin/             # Admin Control Center
-│   ├── login/ & register/ # Authentication Screens
-│   └── page.tsx           # Academic Landing Page
-├── components/
-│   └── layout/            # Academic Navbar & Footer
-├── lib/
-│   ├── db.ts              # Relational Database Manager & Seeder
-│   ├── auth.ts            # JWT & Session Cookie Helpers
-│   ├── AuthContext.tsx    # Client-side Auth Provider & Switcher
-│   └── plagiarism/        # Modular Plagiarism Engine
-│       ├── preprocessor.ts# Tokenizer, Stopwords, Sentence Segmentation
-│       ├── algorithms.ts  # TF-IDF Cosine, N-Gram Jaccard, Levenshtein
-│       ├── extractor.ts   # PDF, DOCX, TXT Binary Buffer Parsers
-│       ├── highlighter.ts # Non-overlapping Offset Highlight Mapper
-│       └── engine.ts      # Multi-Source Orchestrator & Composite Scoring
-└── types/                 # TypeScript Data Models
+```text
+http://localhost:5173
 ```
 
 ---
 
-## 📜 Compliance & Attribution
+## 🌐 Live Demo
 
-Built for the **School of Engineering & Technology (SOET)**.  
-Candidate: **Tathagata Chakraborty** (`UG/SOET/30/24/144`), Section **G**, **B.Tech Computer Science & Engineering**.
+🚀 **Live Application:**
+
+https://tatha-coder-plag-por.vercel.app/
+
+---
+
+## 📸 Application Workflow
+
+### Home Page
+
+Students are introduced to the plagiarism-checking platform and its core functionality.
+
+### Upload
+
+Users upload their academic documents.
+
+### Analysis
+
+The document is processed and checked for similarities.
+
+### Report
+
+The final report presents similarity percentages, matched passages, and source information.
+
+---
+
+## 🎓 Intended Users
+
+This project is primarily designed for:
+
+* College students
+* University students
+* Researchers
+* Academic writers
+* Educators
+* Project teams
+
+It can be particularly useful for checking assignments, reports, essays, research papers, and other academic submissions.
+
+---
+
+## 🔮 Future Improvements
+
+Potential future enhancements include:
+
+* [ ] Improved paraphrase detection
+* [ ] More extensive academic source coverage
+* [ ] Citation recommendations
+* [ ] AI-assisted rewriting suggestions
+* [ ] Downloadable PDF reports
+* [ ] Historical plagiarism reports
+* [ ] User dashboard and analytics
+* [ ] Multi-language document support
+* [ ] Advanced similarity visualization
+* [ ] Improved source verification
+* [ ] Institution/classroom management
+
+---
+
+## 🔒 Security
+
+Security is an important part of the application.
+
+Best practices include:
+
+* Secure Supabase authentication
+* Protected API endpoints
+* Environment variables for secrets
+* Database access policies
+* Input validation
+* File type validation
+* Secure document processing
+
+Never expose:
+
+```text
+SUPABASE_SERVICE_ROLE_KEY
+PRIVATE API KEYS
+DATABASE PASSWORDS
+SECRET TOKENS
+```
+
+in frontend code or public repositories.
+
+---
+
+## 🤝 Contributing
+
+Contributions and suggestions are welcome.
+
+### Contribution Workflow
+
+```bash
+# Fork the repository
+
+# Create a feature branch
+git checkout -b feature/your-feature
+
+# Make your changes
+
+# Commit
+git commit -m "Add your feature"
+
+# Push
+git push origin feature/your-feature
+```
+
+Then open a Pull Request.
+
+---
+
+## 📜 License
+
+This project is intended for educational and academic purposes.
+
+Add an appropriate open-source license to the repository if you plan to distribute or reuse the project publicly.
+
+---
+
+## 👨‍💻 Project
+
+**Plagiarism Checking Portal**
+
+Built to make academic originality checking **simple, transparent, and accessible for students.**
+
+> **Check. Compare. Improve.**
