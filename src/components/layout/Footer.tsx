@@ -17,7 +17,7 @@ export default function Footer() {
           </div>
 
           <div className="flex items-center space-x-6 text-xs text-slate-600 font-medium">
-            <Link href="/" className="hover:text-slate-900 transition-colors">
+            <Link href="/home" className="hover:text-slate-900 transition-colors">
               Home
             </Link>
             <Link href="/upload" className="hover:text-slate-900 transition-colors">

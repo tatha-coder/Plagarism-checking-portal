@@ -35,7 +35,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16">
           {/* Brand / Logo */}
           <div className="flex items-center space-x-3">
-            <Link href={user ? '/dashboard' : '/'} className="flex items-center space-x-2.5">
+            <Link href={user ? '/dashboard' : '/home'} className="flex items-center space-x-2.5">
               <div className="w-8 h-8 rounded-lg bg-slate-900 flex items-center justify-center text-white">
                 <ShieldCheck className="w-5 h-5 text-slate-100" />
               </div>
@@ -46,42 +46,55 @@ export default function Navbar() {
           </div>
 
           {/* Desktop Navigation */}
-          {user && (
-            <nav className="hidden md:flex items-center space-x-1">
-              <Link
-                href="/dashboard"
-                className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
-                  isActive('/dashboard')
-                    ? 'bg-slate-100 text-slate-900 font-semibold'
-                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
-                }`}
-              >
-                Dashboard
-              </Link>
+          <nav className="hidden md:flex items-center space-x-1">
+            <Link
+              href="/home"
+              className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+                pathname === '/home' || pathname === '/'
+                  ? 'bg-slate-100 text-slate-900 font-semibold'
+                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
+              }`}
+            >
+              Home
+            </Link>
 
-              <Link
-                href="/upload"
-                className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
-                  isActive('/upload')
-                    ? 'bg-slate-100 text-slate-900 font-semibold'
-                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
-                }`}
-              >
-                Check Document
-              </Link>
+            {user && (
+              <>
+                <Link
+                  href="/dashboard"
+                  className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+                    isActive('/dashboard')
+                      ? 'bg-slate-100 text-slate-900 font-semibold'
+                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
+                  }`}
+                >
+                  Dashboard
+                </Link>
 
-              <Link
-                href="/history"
-                className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
-                  isActive('/history')
-                    ? 'bg-slate-100 text-slate-900 font-semibold'
-                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
-                }`}
-              >
-                Submissions
-              </Link>
-            </nav>
-          )}
+                <Link
+                  href="/upload"
+                  className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+                    isActive('/upload')
+                      ? 'bg-slate-100 text-slate-900 font-semibold'
+                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
+                  }`}
+                >
+                  Check Document
+                </Link>
+
+                <Link
+                  href="/history"
+                  className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+                    isActive('/history')
+                      ? 'bg-slate-100 text-slate-900 font-semibold'
+                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
+                  }`}
+                >
+                  Submissions
+                </Link>
+              </>
+            )}
+          </nav>
 
           {/* Right Action Bar */}
           <div className="hidden md:flex items-center space-x-3">
@@ -183,6 +196,13 @@ export default function Navbar() {
 
               <div className="space-y-1">
                 <Link
+                  href="/home"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-slate-50"
+                >
+                  Home
+                </Link>
+                <Link
                   href="/dashboard"
                   onClick={() => setMobileMenuOpen(false)}
                   className="block px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-slate-50"
@@ -223,6 +243,13 @@ export default function Navbar() {
             </>
           ) : (
             <div className="space-y-2 pt-2">
+              <Link
+                href="/home"
+                onClick={() => setMobileMenuOpen(false)}
+                className="block w-full text-center py-2 px-4 rounded-lg border border-slate-200 text-sm font-medium text-slate-700 hover:bg-slate-50"
+              >
+                Home
+              </Link>
               <Link
                 href="/login"
                 onClick={() => setMobileMenuOpen(false)}
