@@ -44,6 +44,21 @@ function mapSupabaseUserToSafeUser(sbUser: any): SafeUser {
   };
 }
 
+function mapSupabaseUserToSafeUser(sbUser: any): SafeUser {
+  const metadata = sbUser.user_metadata || {};
+  return {
+    id: sbUser.id,
+    name: metadata.name || metadata.full_name || sbUser.email?.split('@')[0] || 'User',
+    email: sbUser.email || '',
+    role: (metadata.role as 'student' | 'admin') || 'student',
+    roll_number: metadata.roll_number || '',
+    section: metadata.section || '',
+    program: metadata.program || '',
+    created_at: sbUser.created_at || new Date().toISOString(),
+    updated_at: sbUser.updated_at || new Date().toISOString(),
+  };
+}
+
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<SafeUser | null>(null);
   const [loading, setLoading] = useState(true);
