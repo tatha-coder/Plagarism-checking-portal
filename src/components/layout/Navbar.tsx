@@ -5,16 +5,16 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useAuth } from '@/lib/AuthContext';
 import { 
-  ShieldCheck, 
   FileText, 
   UploadCloud, 
   History, 
   User as UserIcon, 
   LogOut, 
-  ShieldAlert, 
   Menu, 
   X,
-  ChevronDown
+  ChevronDown,
+  Activity,
+  Layers
 } from 'lucide-react';
 
 export default function Navbar() {
@@ -30,64 +30,72 @@ export default function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-sm border-b border-slate-200 no-print">
+    <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200/80 no-print transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Brand / Logo */}
-          <div className="flex items-center space-x-3">
-            <Link href={user ? '/dashboard' : '/home'} className="flex items-center space-x-2.5">
-              <div className="w-8 h-8 rounded-lg bg-slate-900 flex items-center justify-center text-white">
-                <ShieldCheck className="w-5 h-5 text-slate-100" />
+          {/* Brand Mark */}
+          <div className="flex items-center space-x-6">
+            <Link href={user ? '/dashboard' : '/home'} className="group flex items-center space-x-3">
+              <div className="w-8 h-8 rounded-lg bg-slate-950 text-white flex items-center justify-center font-mono font-bold text-xs tracking-wider shadow-sm group-hover:bg-academic-900 transition-colors">
+                <span className="text-blue-400">#</span>AP
               </div>
-              <span className="font-semibold text-base text-slate-900 tracking-tight">
-                PlagiarismCheck
-              </span>
+              <div className="flex flex-col">
+                <span className="font-bold text-sm tracking-tight text-slate-950 flex items-center gap-1.5">
+                  AcademicPortal
+                  <span className="inline-block px-1.5 py-0.2 rounded text-[10px] font-mono font-medium bg-slate-100 text-slate-600 border border-slate-200">
+                    v2.4
+                  </span>
+                </span>
+                <span className="text-[10px] text-slate-400 font-mono tracking-wider uppercase">
+                  Similarity Engine
+                </span>
+              </div>
             </Link>
           </div>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-1">
+          {/* Desktop Segmented Navigation */}
+          <nav className="hidden md:flex items-center p-1 rounded-xl bg-slate-100/70 border border-slate-200/60">
             <Link
               href="/home"
-              className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+              className={`px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
                 pathname === '/home' || pathname === '/'
-                  ? 'bg-slate-100 text-slate-900 font-semibold'
-                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
+                  ? 'bg-white text-slate-950 shadow-xs font-semibold'
+                  : 'text-slate-600 hover:text-slate-900'
               }`}
             >
-              Home
+              Overview
             </Link>
 
             {user && (
               <>
                 <Link
                   href="/dashboard"
-                  className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+                  className={`px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
                     isActive('/dashboard')
-                      ? 'bg-slate-100 text-slate-900 font-semibold'
-                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
+                      ? 'bg-white text-slate-950 shadow-xs font-semibold'
+                      : 'text-slate-600 hover:text-slate-900'
                   }`}
                 >
-                  Dashboard
+                  Workbench
                 </Link>
 
                 <Link
                   href="/upload"
-                  className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+                  className={`px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
                     isActive('/upload')
-                      ? 'bg-slate-100 text-slate-900 font-semibold'
-                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
+                      ? 'bg-white text-slate-950 shadow-xs font-semibold'
+                      : 'text-slate-600 hover:text-slate-900'
                   }`}
                 >
-                  Check Document
+                  Document Scan
                 </Link>
 
                 <Link
                   href="/history"
-                  className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+                  className={`px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
                     isActive('/history')
-                      ? 'bg-slate-100 text-slate-900 font-semibold'
-                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
+                      ? 'bg-white text-slate-950 shadow-xs font-semibold'
+                      : 'text-slate-600 hover:text-slate-900'
                   }`}
                 >
                   Submissions
@@ -96,47 +104,59 @@ export default function Navbar() {
             )}
           </nav>
 
-          {/* Right Action Bar */}
+          {/* Right Action Controls */}
           <div className="hidden md:flex items-center space-x-3">
             {user ? (
               <div className="relative">
                 <button
                   onClick={() => setUserDropdownOpen(!userDropdownOpen)}
-                  className="flex items-center space-x-2 p-1.5 rounded-lg hover:bg-slate-100 text-left transition-colors border border-transparent hover:border-slate-200"
+                  className="flex items-center space-x-2.5 px-3 py-1.5 rounded-xl border border-slate-200/80 hover:bg-slate-50 text-left transition-all active:scale-[0.98]"
                 >
-                  <div className="w-7 h-7 rounded-full bg-slate-900 text-white flex items-center justify-center font-medium text-xs">
+                  <div className="w-6 h-6 rounded-md bg-slate-900 text-white flex items-center justify-center font-mono text-[11px] font-semibold">
                     {user.name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase()}
                   </div>
-                  <span className="text-sm font-medium text-slate-800">{user.name}</span>
-                  <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
+                  <div className="flex flex-col text-left">
+                    <span className="text-xs font-semibold text-slate-900 leading-none">{user.name}</span>
+                    <span className="text-[10px] text-slate-500 font-mono leading-none mt-1">Student</span>
+                  </div>
+                  <ChevronDown className="w-3.5 h-3.5 text-slate-400 ml-0.5" />
                 </button>
 
                 {userDropdownOpen && (
                   <div 
-                    className="absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-lg border border-slate-200 py-1.5 z-50"
+                    className="absolute right-0 mt-2 w-60 bg-white rounded-xl shadow-elevated border border-slate-200/80 py-1.5 z-50 animate-slide-in"
                     onMouseLeave={() => setUserDropdownOpen(false)}
                   >
-                    <div className="px-4 py-2 border-b border-slate-100">
-                      <p className="text-xs font-semibold text-slate-900">{user.name}</p>
-                      <p className="text-[11px] text-slate-500 truncate">{user.email}</p>
+                    <div className="px-4 py-2.5 border-b border-slate-100">
+                      <p className="text-xs font-bold text-slate-950">{user.name}</p>
+                      <p className="text-[11px] font-mono text-slate-500 truncate mt-0.5">{user.email}</p>
                     </div>
+
+                    <Link
+                      href="/dashboard"
+                      onClick={() => setUserDropdownOpen(false)}
+                      className="flex items-center space-x-2.5 px-4 py-2 text-xs text-slate-700 hover:bg-slate-50 transition-colors"
+                    >
+                      <Layers className="w-3.5 h-3.5 text-slate-400" />
+                      <span>Workspace Dashboard</span>
+                    </Link>
 
                     <Link
                       href="/profile"
                       onClick={() => setUserDropdownOpen(false)}
-                      className="flex items-center space-x-2 px-4 py-2 text-xs text-slate-700 hover:bg-slate-50 transition-colors"
+                      className="flex items-center space-x-2.5 px-4 py-2 text-xs text-slate-700 hover:bg-slate-50 transition-colors"
                     >
                       <UserIcon className="w-3.5 h-3.5 text-slate-400" />
-                      <span>Profile Settings</span>
+                      <span>Account Settings</span>
                     </Link>
 
                     <Link
                       href="/history"
                       onClick={() => setUserDropdownOpen(false)}
-                      className="flex items-center space-x-2 px-4 py-2 text-xs text-slate-700 hover:bg-slate-50 transition-colors"
+                      className="flex items-center space-x-2.5 px-4 py-2 text-xs text-slate-700 hover:bg-slate-50 transition-colors"
                     >
                       <History className="w-3.5 h-3.5 text-slate-400" />
-                      <span>Submissions</span>
+                      <span>Audit Trail & Records</span>
                     </Link>
 
                     <div className="border-t border-slate-100 my-1"></div>
@@ -146,27 +166,27 @@ export default function Navbar() {
                         setUserDropdownOpen(false);
                         logout();
                       }}
-                      className="flex items-center space-x-2 w-full px-4 py-2 text-xs text-red-600 hover:bg-red-50 transition-colors text-left"
+                      className="flex items-center space-x-2.5 w-full px-4 py-2 text-xs text-rose-600 hover:bg-rose-50/60 transition-colors text-left font-medium"
                     >
-                      <LogOut className="w-3.5 h-3.5 text-red-500" />
+                      <LogOut className="w-3.5 h-3.5 text-rose-500" />
                       <span>Sign Out</span>
                     </button>
                   </div>
                 )}
               </div>
             ) : (
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-2.5">
                 <Link
                   href="/login"
-                  className="px-3.5 py-1.5 text-sm font-medium text-slate-700 hover:text-slate-900 rounded-lg hover:bg-slate-100 transition-colors"
+                  className="px-3.5 py-1.5 text-xs font-semibold text-slate-700 hover:text-slate-950 rounded-lg hover:bg-slate-100 transition-colors"
                 >
-                  Student Sign In
+                  Sign In
                 </Link>
                 <Link
                   href="/register"
-                  className="px-3.5 py-1.5 text-sm font-medium text-white bg-slate-900 hover:bg-slate-800 rounded-lg shadow-sm transition-colors"
+                  className="px-4 py-2 text-xs font-semibold text-white bg-slate-950 hover:bg-slate-800 rounded-lg shadow-xs transition-all active:scale-[0.98]"
                 >
-                  Student Sign Up
+                  Create Account
                 </Link>
               </div>
             )}
@@ -176,7 +196,8 @@ export default function Navbar() {
           <div className="flex md:hidden items-center space-x-2">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg text-slate-600 hover:bg-slate-100"
+              className="p-2 rounded-lg text-slate-700 hover:bg-slate-100"
+              aria-label="Toggle Navigation Menu"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
@@ -186,12 +207,12 @@ export default function Navbar() {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-slate-200 bg-white px-4 pt-3 pb-6 space-y-3">
+        <div className="md:hidden border-t border-slate-200 bg-white px-4 pt-3 pb-6 space-y-3 shadow-lg">
           {user ? (
             <>
               <div className="pb-3 border-b border-slate-100">
-                <div className="font-medium text-sm text-slate-900">{user.name}</div>
-                <div className="text-xs text-slate-500">{user.email}</div>
+                <div className="font-semibold text-sm text-slate-900">{user.name}</div>
+                <div className="text-xs font-mono text-slate-500">{user.email}</div>
               </div>
 
               <div className="space-y-1">
@@ -200,42 +221,42 @@ export default function Navbar() {
                   onClick={() => setMobileMenuOpen(false)}
                   className="block px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-slate-50"
                 >
-                  Home
+                  Overview
                 </Link>
                 <Link
                   href="/dashboard"
                   onClick={() => setMobileMenuOpen(false)}
                   className="block px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-slate-50"
                 >
-                  Dashboard
+                  Workbench
                 </Link>
                 <Link
                   href="/upload"
                   onClick={() => setMobileMenuOpen(false)}
                   className="block px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-slate-50"
                 >
-                  Check Document
+                  Document Scan
                 </Link>
                 <Link
                   href="/history"
                   onClick={() => setMobileMenuOpen(false)}
                   className="block px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-slate-50"
                 >
-                  My Submissions
+                  Submissions
                 </Link>
                 <Link
                   href="/profile"
                   onClick={() => setMobileMenuOpen(false)}
                   className="block px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-slate-50"
                 >
-                  Profile Settings
+                  Account Settings
                 </Link>
               </div>
 
               <div className="pt-3 border-t border-slate-100 flex items-center justify-end">
                 <button
                   onClick={() => { logout(); setMobileMenuOpen(false); }}
-                  className="text-xs text-red-600 font-medium py-1.5 px-3 rounded-lg hover:bg-red-50 transition-colors"
+                  className="text-xs text-rose-600 font-medium py-1.5 px-3 rounded-lg hover:bg-rose-50 transition-colors"
                 >
                   Sign Out
                 </button>
@@ -248,21 +269,21 @@ export default function Navbar() {
                 onClick={() => setMobileMenuOpen(false)}
                 className="block w-full text-center py-2 px-4 rounded-lg border border-slate-200 text-sm font-medium text-slate-700 hover:bg-slate-50"
               >
-                Home
+                Overview
               </Link>
               <Link
                 href="/login"
                 onClick={() => setMobileMenuOpen(false)}
                 className="block w-full text-center py-2 px-4 rounded-lg border border-slate-300 text-sm font-medium text-slate-700"
               >
-                Student Sign In
+                Sign In
               </Link>
               <Link
                 href="/register"
                 onClick={() => setMobileMenuOpen(false)}
-                className="block w-full text-center py-2 px-4 rounded-lg bg-slate-900 text-sm font-medium text-white"
+                className="block w-full text-center py-2 px-4 rounded-lg bg-slate-950 text-sm font-medium text-white"
               >
-                Student Sign Up
+                Create Account
               </Link>
             </div>
           )}
