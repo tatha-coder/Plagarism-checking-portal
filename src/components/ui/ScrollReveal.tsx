@@ -97,7 +97,7 @@ export default function ScrollReveal({
     return `scale(${scaleValue})`;
   };
 
-  const Component = as as keyof JSX.IntrinsicElements;
+  const Component = as as any;
 
   // Spring overshoot cubic bezier for an unmistakable, energetic pop-up bounce
   const springEasing = 'cubic-bezier(0.18, 1.25, 0.32, 1)';
