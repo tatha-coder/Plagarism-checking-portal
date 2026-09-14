@@ -25,6 +25,7 @@ import {
   Activity,
   Award
 } from 'lucide-react';
+import ScrollReveal from '@/components/ui/ScrollReveal';
 
 interface SampleCase {
   id: string;
@@ -198,10 +199,14 @@ export default function HomePage() {
     <div className="flex flex-col min-h-full bg-[#fafaf9] text-slate-950">
       
       {/* 1. HERO SECTION: Editorial Clarity & Precise Hierarchy */}
-      <section className="relative pt-16 pb-20 md:pt-24 md:pb-28 border-b border-slate-200/80 overflow-hidden bg-white">
+      <ScrollReveal
+        as="section"
+        direction="pop"
+        className="relative pt-16 pb-20 md:pt-24 md:pb-28 border-b border-slate-200/80 overflow-hidden bg-white"
+      >
         <div className="absolute inset-0 bg-grid-subtle opacity-70 pointer-events-none" />
         
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <ScrollReveal direction="pop" intensity="high" delay={50} className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           
           {/* Engine Status Pill */}
           <div className="flex items-center space-x-2.5 mb-8">
@@ -266,11 +271,15 @@ export default function HomePage() {
               <span>Strictly private • Never indexed into public crawlers</span>
             </div>
           </div>
-        </div>
-      </section>
+        </ScrollReveal>
+      </ScrollReveal>
 
       {/* 2. TECHNICAL TELEMETRY RIBBON: No Cliché Marquee, Clean Telemetry */}
-      <section className="py-3.5 bg-slate-950 text-slate-300 border-b border-slate-800 text-xs font-mono select-none">
+      <ScrollReveal
+        as="section"
+        direction="pop"
+        className="py-3.5 bg-slate-950 text-slate-300 border-b border-slate-800 text-xs font-mono select-none"
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap items-center justify-between gap-y-2">
           <div className="flex items-center space-x-6">
             <span className="flex items-center space-x-2 text-slate-400">
@@ -293,14 +302,15 @@ export default function HomePage() {
             <span>DATA LEAKAGE: <strong className="text-emerald-400 font-mono">ZERO</strong></span>
           </div>
         </div>
-      </section>
+      </ScrollReveal>
 
       {/* 3. CENTERPIECE: INTERACTIVE INSPECTION WORKBENCH SANDBOX */}
       <section className="py-16 md:py-24 bg-white border-b border-slate-200/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           {/* Section Header */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 pb-6 border-b border-slate-200">
+          <ScrollReveal direction="pop" intensity="high">
+            <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 pb-6 border-b border-slate-200">
             <div>
               <span className="text-xs font-mono uppercase tracking-wider text-slate-500 font-semibold">
                 Interactive Inspection Demo
@@ -333,9 +343,11 @@ export default function HomePage() {
               ))}
             </div>
           </div>
+          </ScrollReveal>
 
           {/* Workbench Frame */}
-          <div className="rounded-2xl border border-slate-200/90 bg-[#fafaf9] shadow-elevated overflow-hidden">
+          <ScrollReveal direction="pop" intensity="high" delay={100}>
+            <div className="rounded-2xl border border-slate-200/90 bg-[#fafaf9] shadow-elevated overflow-hidden">
             
             {/* Workbench Top Bar */}
             <div className="px-5 py-3.5 bg-white border-b border-slate-200 flex flex-wrap items-center justify-between gap-3">
@@ -482,6 +494,7 @@ export default function HomePage() {
             </div>
 
           </div>
+          </ScrollReveal>
 
         </div>
       </section>
@@ -490,23 +503,26 @@ export default function HomePage() {
       <section className="py-20 md:py-28 bg-[#fafaf9] border-b border-slate-200/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="max-w-3xl mb-14">
-            <span className="text-xs font-mono uppercase tracking-wider text-slate-500 font-semibold">
-              Engine Mechanics
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-950 mt-1 leading-tight">
-              Rigorous lexical decomposition. Zero black-box guesswork.
-            </h2>
-            <p className="mt-3 text-base text-slate-600 leading-relaxed">
-              Every percentage score is mathematically derived from transparent shingle vectors and cross-referenced with exact citation tokens.
-            </p>
-          </div>
+          <ScrollReveal direction="pop" intensity="high">
+            <div className="max-w-3xl mb-14">
+              <span className="text-xs font-mono uppercase tracking-wider text-slate-500 font-semibold">
+                Engine Mechanics
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-950 mt-1 leading-tight">
+                Rigorous lexical decomposition. Zero black-box guesswork.
+              </h2>
+              <p className="mt-3 text-base text-slate-600 leading-relaxed">
+                Every percentage score is mathematically derived from transparent shingle vectors and cross-referenced with exact citation tokens.
+              </p>
+            </div>
+          </ScrollReveal>
 
           {/* Asymmetric Bento Grid (2 large, 2 compact) */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             
             {/* Card 1: 2-Column Wide - Multi-Tier Comparison Engine */}
-            <div className="md:col-span-2 p-8 rounded-2xl bg-white border border-slate-200 shadow-card flex flex-col justify-between space-y-6">
+            <ScrollReveal direction="pop" intensity="high" delay={0} className="md:col-span-2">
+              <div className="h-full p-8 rounded-2xl bg-white border border-slate-200 shadow-card flex flex-col justify-between space-y-6">
               <div className="space-y-3">
                 <div className="inline-flex items-center space-x-2 px-2.5 py-1 rounded-md bg-blue-50 text-blue-700 text-xs font-mono font-semibold">
                   <Layers className="w-3.5 h-3.5" />
@@ -538,9 +554,11 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
+          </ScrollReveal>
 
-            {/* Card 2: 1-Column - Authenticated PDF Certificate */}
-            <div className="p-8 rounded-2xl bg-white border border-slate-200 shadow-card flex flex-col justify-between space-y-6">
+          {/* Card 2: 1-Column - Authenticated PDF Certificate */}
+          <ScrollReveal direction="pop" intensity="high" delay={100}>
+            <div className="h-full p-8 rounded-2xl bg-white border border-slate-200 shadow-card flex flex-col justify-between space-y-6">
               <div className="space-y-3">
                 <div className="inline-flex items-center space-x-2 px-2.5 py-1 rounded-md bg-emerald-50 text-emerald-700 text-xs font-mono font-semibold">
                   <Award className="w-3.5 h-3.5" />
@@ -569,9 +587,11 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
+          </ScrollReveal>
 
-            {/* Card 3: 1-Column - Student Privacy Guarantee */}
-            <div className="p-8 rounded-2xl bg-white border border-slate-200 shadow-card flex flex-col justify-between space-y-6">
+          {/* Card 3: 1-Column - Student Privacy Guarantee */}
+          <ScrollReveal direction="pop" intensity="high" delay={180}>
+            <div className="h-full p-8 rounded-2xl bg-white border border-slate-200 shadow-card flex flex-col justify-between space-y-6">
               <div className="space-y-3">
                 <div className="inline-flex items-center space-x-2 px-2.5 py-1 rounded-md bg-purple-50 text-purple-700 text-xs font-mono font-semibold">
                   <Lock className="w-3.5 h-3.5" />
@@ -590,9 +610,11 @@ export default function HomePage() {
                 <span>Zero third-party exposure</span>
               </div>
             </div>
+          </ScrollReveal>
 
-            {/* Card 4: 2-Column Wide - Citation & Quotation Guidance */}
-            <div className="md:col-span-2 p-8 rounded-2xl bg-white border border-slate-200 shadow-card flex flex-col justify-between space-y-6">
+          {/* Card 4: 2-Column Wide - Citation & Quotation Guidance */}
+          <ScrollReveal direction="pop" intensity="high" delay={260} className="md:col-span-2">
+            <div className="h-full p-8 rounded-2xl bg-white border border-slate-200 shadow-card flex flex-col justify-between space-y-6">
               <div className="space-y-3">
                 <div className="inline-flex items-center space-x-2 px-2.5 py-1 rounded-md bg-amber-50 text-amber-700 text-xs font-mono font-semibold">
                   <BookOpen className="w-3.5 h-3.5" />
@@ -621,6 +643,7 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
+          </ScrollReveal>
 
           </div>
 
@@ -631,55 +654,65 @@ export default function HomePage() {
       <section className="py-20 bg-white border-b border-slate-200/80">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="max-w-2xl mb-14">
-            <span className="text-xs font-mono uppercase tracking-wider text-slate-500 font-semibold">
-              Standards & Guidelines
-            </span>
-            <h2 className="text-3xl font-bold tracking-tight text-slate-950 mt-1">
-              Common questions on similarity thresholds.
-            </h2>
-            <p className="text-sm text-slate-600 mt-2">
-              Essential knowledge for thesis writers, graduate researchers, and undergraduate submissions.
-            </p>
-          </div>
+          <ScrollReveal direction="pop" intensity="high">
+            <div className="max-w-2xl mb-14">
+              <span className="text-xs font-mono uppercase tracking-wider text-slate-500 font-semibold">
+                Standards & Guidelines
+              </span>
+              <h2 className="text-3xl font-bold tracking-tight text-slate-950 mt-1">
+                Common questions on similarity thresholds.
+              </h2>
+              <p className="text-sm text-slate-600 mt-2">
+                Essential knowledge for thesis writers, graduate researchers, and undergraduate submissions.
+              </p>
+            </div>
+          </ScrollReveal>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
             
-            <div className="space-y-2.5 pb-6 border-b border-slate-100">
-              <h3 className="text-base font-bold text-slate-950">
-                What similarity score does an academic committee expect?
-              </h3>
-              <p className="text-sm text-slate-600 leading-relaxed">
-                Most universities and conference committees expect an aggregate similarity index below 15% to 20%, with standard bibliographies, methodology templates, and boilerplate definitions excluded. The key factor is never having an uncredited verbatim clause longer than 7–10 words.
-              </p>
-            </div>
+            <ScrollReveal direction="pop" intensity="high" delay={0}>
+              <div className="space-y-2.5 pb-6 border-b border-slate-100">
+                <h3 className="text-base font-bold text-slate-950">
+                  What similarity score does an academic committee expect?
+                </h3>
+                <p className="text-sm text-slate-600 leading-relaxed">
+                  Most universities and conference committees expect an aggregate similarity index below 15% to 20%, with standard bibliographies, methodology templates, and boilerplate definitions excluded. The key factor is never having an uncredited verbatim clause longer than 7–10 words.
+                </p>
+              </div>
+            </ScrollReveal>
 
-            <div className="space-y-2.5 pb-6 border-b border-slate-100">
-              <h3 className="text-base font-bold text-slate-950">
-                Will submitting here trigger a Turnitin or university false positive?
-              </h3>
-              <p className="text-sm text-slate-600 leading-relaxed">
-                Never. Our repository architecture is strictly non-indexing. Your documents remain encrypted in your private workspace and are never shared with academic crawler networks, institutional pools, or public indices.
-              </p>
-            </div>
+            <ScrollReveal direction="pop" intensity="high" delay={100}>
+              <div className="space-y-2.5 pb-6 border-b border-slate-100">
+                <h3 className="text-base font-bold text-slate-950">
+                  Will submitting here trigger a Turnitin or university false positive?
+                </h3>
+                <p className="text-sm text-slate-600 leading-relaxed">
+                  Never. Our repository architecture is strictly non-indexing. Your documents remain encrypted in your private workspace and are never shared with academic crawler networks, institutional pools, or public indices.
+                </p>
+              </div>
+            </ScrollReveal>
 
-            <div className="space-y-2.5 pb-6 border-b border-slate-100">
-              <h3 className="text-base font-bold text-slate-950">
-                How does the engine identify paraphrased passages?
-              </h3>
-              <p className="text-sm text-slate-600 leading-relaxed">
-                Our lexical pipeline calculates token frequency vectors and sliding n-gram shingles simultaneously. Even when synonyms are swapped or sentence clauses rearranged, vector clustering identifies borrowed semantic structures.
-              </p>
-            </div>
+            <ScrollReveal direction="pop" intensity="high" delay={180}>
+              <div className="space-y-2.5 pb-6 border-b border-slate-100">
+                <h3 className="text-base font-bold text-slate-950">
+                  How does the engine identify paraphrased passages?
+                </h3>
+                <p className="text-sm text-slate-600 leading-relaxed">
+                  Our lexical pipeline calculates token frequency vectors and sliding n-gram shingles simultaneously. Even when synonyms are swapped or sentence clauses rearranged, vector clustering identifies borrowed semantic structures.
+                </p>
+              </div>
+            </ScrollReveal>
 
-            <div className="space-y-2.5 pb-6 border-b border-slate-100">
-              <h3 className="text-base font-bold text-slate-950">
-                What file formats and sizes are permitted?
-              </h3>
-              <p className="text-sm text-slate-600 leading-relaxed">
-                We accept Adobe PDF (.pdf), Microsoft Word (.docx), and plain text (.txt) files up to 10MB in size. Headings, footnotes, and paragraph structure are preserved automatically during token extraction.
-              </p>
-            </div>
+            <ScrollReveal direction="pop" intensity="high" delay={260}>
+              <div className="space-y-2.5 pb-6 border-b border-slate-100">
+                <h3 className="text-base font-bold text-slate-950">
+                  What file formats and sizes are permitted?
+                </h3>
+                <p className="text-sm text-slate-600 leading-relaxed">
+                  We accept Adobe PDF (.pdf), Microsoft Word (.docx), and plain text (.txt) files up to 10MB in size. Headings, footnotes, and paragraph structure are preserved automatically during token extraction.
+                </p>
+              </div>
+            </ScrollReveal>
 
           </div>
 
@@ -690,7 +723,7 @@ export default function HomePage() {
       <section className="py-20 bg-slate-950 text-white relative overflow-hidden">
         <div className="absolute inset-0 bg-dot-subtle opacity-10 pointer-events-none" />
         
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 space-y-8">
+        <ScrollReveal direction="pop" intensity="high" className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 space-y-8">
           <span className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-slate-900 text-blue-400 text-xs font-mono font-medium border border-slate-800">
             <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
             SUBMISSION QUEUE OPEN
@@ -720,7 +753,7 @@ export default function HomePage() {
               <span>{user ? "View Saved Reports" : "Sign In to Portal"}</span>
             </Link>
           </div>
-        </div>
+        </ScrollReveal>
       </section>
 
     </div>
